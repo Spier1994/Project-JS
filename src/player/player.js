@@ -4,9 +4,10 @@ export class Player {
         this.trackIndex = 0;
         this.currentTrack = null;
         this.isPlaying = false;
-        this.audio = null;
+        this.audio = new Audio();
         this.volume = 0.5;
     }
+
     /**
      * Метод добавления трека
      * @param  {object} track - объект трека
@@ -14,6 +15,7 @@ export class Player {
     addTrack(track) {
         this.tracks.push(track);
     }
+
     /**
      * Метод получания текущего трека
      * @return {object} возвращает объект данных текущего трека 
@@ -25,6 +27,7 @@ export class Player {
             artist: this.currentTrack?.artists[0].name
         };
     }
+
     /**
      * Метод добавления текущего трека
      * @param  {string} trackName - название трека
@@ -39,35 +42,32 @@ export class Player {
         });
         this.currentTrack = track;
 
-        if (this.audio) {
+        if (this.audio.src) {
             this.audio.pause();
         }
 
-        this.audio = new Audio(track.preview_url);
+        this.audio.src = track && track.preview_url
         this.audio.volume = this.volume;
     }
+
     /**
      * Метод проигрывания трека
      */
     play() {
-
-        if (this.isPlaying) {
-            this.audio.pause();
-            this.isPlaying = false;
-        }
-
         this.audio.volume = this.volume;
         this.audio.play();
         this.isPlaying = true;
     }
+
     /**
      * Метод остановки проигрывания трека
      */
     pause() {
-        if (!this.audio) return;
+        if (!this.audio.src) return;
         this.audio.pause();
         this.isPlaying = false;
     }
+
     /**
      * Метод установки громкости
      * @param  {number} value - значение громкости
@@ -77,10 +77,12 @@ export class Player {
         if (!this.audio) return;
         this.audio.volume = value;
     }
+
     /**
      * Метод переключения плеера на следующий трек
      */
     nextTrack() {
+
         if (!this.currentTrack) return;
 
         this.trackIndex++;
@@ -90,8 +92,10 @@ export class Player {
         }
 
         this.track = this.tracks[this.trackIndex].name;
+        this.isPlaying = true;
         this.audio.play();
     }
+
     /**
      * Метод переключения плеера на предыдущий трек
      */
@@ -105,6 +109,7 @@ export class Player {
         }
 
         this.track = this.tracks[this.trackIndex].name;
+        this.isPlaying = true;
         this.audio.play();
     }
-}
+} 

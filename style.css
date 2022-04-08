@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-
 :root {
     --hover: rgb(33, 33, 33);
     --sidebar-with: 232px;
@@ -25,6 +23,7 @@ body {
 .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
     width: 100%;
 }
 
@@ -33,7 +32,7 @@ body {
     fill: currentColor;
 }
 
-.icon16x16 {
+.icon-medium {
     height: 16px;
     width: 16px;
 }
@@ -57,7 +56,7 @@ body {
 
 .play_button:hover {
     transform: scale(1.1);
-    color: #000 !important;
+    color: #000 !important; /* Не перебивается color из-за ховера на селекторе "button_player" */
 }
 
 .button_player:hover {
@@ -70,7 +69,7 @@ body {
 
 .sidebar {
     background: #000;
-    z-index: 3;
+    overflow: hidden;
     min-width: var(--sidebar-with);
     min-height: 100vh;
     position: fixed;
@@ -90,8 +89,7 @@ body {
 
 .sidebar__logo-svg {
     height: 40px;
-    max-width: 131px;
-    width: 100%;
+    width: 131px;
 }
 
 .sidebar__nav {
@@ -112,7 +110,6 @@ body {
     border-radius: 4px;
     color: #b3b3b3;
     font-weight: 700;
-    line-height: 1rem;
     font-size: 14px;
     text-decoration: none;
 }
@@ -138,7 +135,7 @@ body {
     height: 64px;
     width: 100%;
     position: fixed;
-    z-index: 2;
+    z-index: 1;
     background-color: #00000080;
 }
 
@@ -181,6 +178,7 @@ body {
     display: flex;
     gap: 24px;
     margin-bottom: 24px;
+    flex-wrap: wrap;
 }
 
 .title {
@@ -214,14 +212,12 @@ body {
 
 .card_title {
     font-size: 1rem;
-    line-height: 1.5rem;
     font-weight: 700;
     padding-bottom: 4px;
 }
 
 .card_description {
     font-size: 0.875rem;
-    line-height: 1rem;
     color: #a7a7a7;
     font-weight: 400;
 }
@@ -287,20 +283,17 @@ body {
 
 .tracks_item_info-album-name {
     font-size: 16px;
-    line-height: 1.5rem;
     font-weight: 400;
 }
 
 .tracks_item_info-album-artist {
     font-size: 14px;
-    line-height: 1rem;
     font-weight: 400;
     color: #a7a7a7;
 }
 
 .tracks_item-ms {
     font-size: 14px;
-    line-height: 1rem;
     font-weight: 400;
 }
 
@@ -308,7 +301,7 @@ body {
     background: #181818;
     border-top: 1px solid #282828;
     width: 100%;
-    z-index: 4;
+    overflow: hidden;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -341,7 +334,6 @@ body {
 .player_info-album-name {
     font-size: 14px;
     font-weight: 600;
-    line-height: 1rem;
 }
 
 .player_info-album-artist {
@@ -387,4 +379,4 @@ body {
     display: flex;
     justify-content: flex-end;
     width: 30%;
-}
+} 
